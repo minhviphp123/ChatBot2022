@@ -4,15 +4,15 @@ const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
-function getHomePage() {
+function getHomePage(req, res) {
     return res.render('home');
 }
 
-function getWebHook() {
+function getWebHook(req, res) {
 
 }
 
-function postWebHook() {
+function postWebHook(req, res) {
     app.post('/webhook', (req, res) => {
 
         // Parse the request body from the POST
