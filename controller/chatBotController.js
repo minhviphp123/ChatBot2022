@@ -87,9 +87,13 @@ async function handleMessage(sender_psid, received_message) {
         //         console.error("Unable to send message:" + err);
         //     }
         // });
-        let username = await getUserName(sender_psid);
-        console.log(username);
-        response = { 'text': `Hello ${username}` }
+        try {
+            let username = await getUserName(sender_psid);
+            console.log(username);
+            response = { 'text': `Hello ${username}` }
+        } catch (err) {
+            throw new Error(err);
+        }
     } else if (received_message.text) {
         response = { 'text': `You sent the message: "${received_message}". Now send me an image!` }
     }
