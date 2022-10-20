@@ -1,4 +1,5 @@
 require('dotenv').config();
+const { response } = require('express');
 const request = require('request');
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
@@ -68,17 +69,31 @@ function postWebHook(req, res) {
 
 }
 
-function handleMessage(sender_psid, received_message) {
+async function handleMessage(sender_psid, received_message) {
     let response;
 
     // Checks if the message contains text
-    if (received_message.text) {
+    if (received_message.text === 'hello' || 'hi') {
         // Create the payload for a basic text message, which
         // will be added to the body of our request to the Send API
-        response = {
-            "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
-        }
-    } else if (received_message.attachments) {
+        // request({
+        //     "uri": `https://graph.facebook.com/v2.6/me/messages/${webhook_event.sender.id}`,
+        //     "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        //     "method": "GET",
+        // }, (err, res, body) => {
+        //     if (!err) {
+        //         console.log('message sent!')
+        //     } else {
+        //         console.error("Unable to send message:" + err);
+        //     }
+        // });
+        let username = await getUserName(sender_psid);
+        response = { 'text': `Hello "${username}"` }
+    } else if (received_message.text) {
+        response = { 'text': `You sent the message: "${received_message}". Now send me an image!` }
+    }
+
+    else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -150,6 +165,24 @@ function handlePostback(sender_psid, received_postback) {
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
+}
+
+async function getUserName(sender_psid,) {
+    let username = '';
+    // Send the HTTP request to the Messenger Platform
+    await request({
+        "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}"`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "GET"
+    }, (err, res, body) => {
+        if (!err) {
+            let response = JSON.parse(res);
+            username = `${response.first_name} ${response.last_name}`
+        } else {
+            console.error("Unable to send message:" + err);
+        }
+    });
+    return username;
 }
 
 module.exports = {

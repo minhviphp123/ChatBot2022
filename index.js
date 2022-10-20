@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const router = require('./route/userRoute');
 require('dotenv').config();
 const port = process.env.PORT || 4000;
+const request = require('request');
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 //public
 app.use(express.static(path.join(__dirname, 'public')));
