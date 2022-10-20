@@ -89,7 +89,7 @@ async function handleMessage(sender_psid, received_message) {
         // });
         let username = await getUserName(sender_psid);
         console.log(username);
-        response = { 'text': `Hello "${username}"` }
+        response = { 'text': `Hello ${username}` }
     } else if (received_message.text) {
         response = { 'text': `You sent the message: "${received_message}". Now send me an image!` }
     }
