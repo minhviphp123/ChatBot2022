@@ -71,6 +71,7 @@ function postWebHook(req, res) {
 
 async function handleMessage(sender_psid, received_message) {
     let response;
+    let username
 
     // Checks if the message contains text
     if (received_message.text === 'hello' || 'hi') {
@@ -88,7 +89,7 @@ async function handleMessage(sender_psid, received_message) {
         //     }
         // });
         try {
-            let username = await getUserName(sender_psid);
+            username = await getUserName(sender_psid);
             console.log(username);
             response = { 'text': `Hello ${username}` }
         } catch (err) {
@@ -181,7 +182,7 @@ async function getUserName(sender_psid,) {
         "method": "GET"
     }, (err, res, body) => {
         if (!err) {
-            let response = JSON.parse(res);
+            let response = JSON.parse(body);
             username = `${response.first_name} ${response.last_name}`
         } else {
             console.error("Unable to send message:" + err);
