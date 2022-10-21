@@ -74,7 +74,7 @@ async function handleMessage(sender_psid, received_message) {
     let username
 
     // Checks if the message contains text
-    if (received_message.text === 'hello' || 'hi') {
+    if (received_message.text === 'hello' || received_message.text === 'hi') {
         // Create the payload for a basic text message, which
         // will be added to the body of our request to the Send API
         // request({
@@ -94,11 +94,11 @@ async function handleMessage(sender_psid, received_message) {
         } catch (err) {
             throw new Error(err);
         }
-    } else if (received_message.text !== 'hello' && 'hi' && 'Get_started') {
+    } if (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started') {
         response = { 'text': `You sent the message: "${received_message}". Now send me an image!` }
     }
 
-    else if (received_message.attachments) {
+    if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
