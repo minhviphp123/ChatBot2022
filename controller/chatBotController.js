@@ -156,7 +156,7 @@ function callSendAPI(sender_psid, response) {
     });
 }
 
-function handlePostback(sender_psid, received_postback) {
+async function handlePostback(sender_psid, received_postback) {
     let response;
 
     // Get the payload for the postback
@@ -168,7 +168,12 @@ function handlePostback(sender_psid, received_postback) {
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
     } else if (payload === 'GET_STARTED') {
-        response = { "text": "hello" }
+        try {
+            username = await getUserName(sender_psid);
+            response = { 'text': `Hello ${username}` }
+        } catch (err) {
+            throw new Error(err);
+        }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
