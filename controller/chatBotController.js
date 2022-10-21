@@ -158,7 +158,7 @@ function callSendAPI(sender_psid, response) {
 
 async function handlePostback(sender_psid, received_postback) {
     let response;
-
+    let username;
     // Get the payload for the postback
     let payload = received_postback.payload;
 
