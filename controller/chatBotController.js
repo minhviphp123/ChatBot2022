@@ -95,7 +95,7 @@ async function handleMessage(sender_psid, received_message) {
             throw new Error(err);
         }
     } if (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started') {
-        response = { 'text': `You sent the message: "${received_message}". Now send me an image!` }
+        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
     }
 
     if (received_message.attachments) {
