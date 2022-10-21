@@ -167,6 +167,8 @@ function handlePostback(sender_psid, received_postback) {
         response = { "text": "Thanks!" }
     } else if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
+    } else if (payload === 'GET_STARTED') {
+        response = { "text": "hello" }
     }
     // Send the message to acknowledge the postback
     callSendAPI(sender_psid, response);
@@ -193,6 +195,29 @@ function getUserName(sender_psid,) {
     })
 }
 
+async function setupProfile(req, res) {
+
+    let request_body = {
+        "get_started": { "payload": "GET_STARTED" },
+        "whitelisted_domains": ["https://l--chat-app--l.herokuapp.com/"]
+    }
+
+    await request({
+        "uri": `https://graph.facebook.com/v9.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    }, function (err, res, body) {
+        if (!err) {
+            console.log('set up profile succeed');
+        } else {
+            console.log('unable to setup user profile');
+        }
+    })
+
+}
+
 module.exports = {
-    getHomePage, getWebHook, postWebHook
+    getHomePage, getWebHook, postWebHook,
+    setupProfile
 }
