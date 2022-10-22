@@ -167,9 +167,10 @@ async function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
-    } else if (payload === 'no') {
+    }
+    if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
-    } else if (payload === 'GET_STARTED') {
+    } if (payload === 'GET_STARTED') {
         try {
             username = await getUserName(sender_psid);
             response1 = { 'text': `Hello ${username}` }
@@ -181,6 +182,10 @@ async function handlePostback(sender_psid, received_postback) {
         } catch (err) {
             throw new Error(err);
         }
+    }
+
+    if (payload === 'menu_main') {
+        response = { "text": "Oops, try sending another image." }
     }
 }
 
