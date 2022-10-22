@@ -5,6 +5,8 @@ const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
+let imgGetStarted = 'https://bit.ly/euschatbot'
+
 function getHomePage(req, res) {
     return res.render('home');
 }
@@ -157,7 +159,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 async function handlePostback(sender_psid, received_postback) {
-    let response;
+    let response1, response2;
     let username;
     // Get the payload for the postback
     let payload = received_postback.payload;
@@ -170,13 +172,16 @@ async function handlePostback(sender_psid, received_postback) {
     } else if (payload === 'GET_STARTED') {
         try {
             username = await getUserName(sender_psid);
-            response = { 'text': `Hello ${username}` }
+            response1 = { 'text': `Hello ${username}` }
+            response2 = getStartedTemplate();
+            // Send the message to acknowledge the postback
+            await callSendAPI(sender_psid, response1);
+            //send generic template message
+            await callSendAPI(sender_psid, response2)
         } catch (err) {
             throw new Error(err);
         }
     }
-    // Send the message to acknowledge the postback
-    callSendAPI(sender_psid, response);
 }
 
 function getUserName(sender_psid,) {
@@ -220,6 +225,40 @@ async function setupProfile(req, res) {
         }
     })
 
+}
+
+function getStartedTemplate() {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": "Hello",
+                    "subtitle": "Dưới đây là các lựa chọn...",
+                    "image_url": imgGetStarted,
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Menu chính!",
+                            "payload": "main_menu",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "Đặt bàn",
+                            "payload": "reserve_table",
+                        },
+                        {
+                            "type": "postback",
+                            "title": "HD sử dụng Bot!",
+                            "payload": "guide_to_use",
+                        }
+                    ],
+                }]
+            }
+        }
+    }
+    return response;
 }
 
 module.exports = {
