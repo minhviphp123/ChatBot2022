@@ -186,7 +186,7 @@ async function handlePostback(sender_psid, received_postback) {
         }
     }
 
-    if (payload === 'menu_main') {
+    if (payload === 'main_menu') {
         response = { "text": "MM" }
         await callSendAPI(sender_psid, response);
     }
