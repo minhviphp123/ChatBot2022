@@ -159,7 +159,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 async function handlePostback(sender_psid, received_postback) {
-    let response1, response2;
+    let response1, response2, response;
     let username;
     // Get the payload for the postback
     let payload = received_postback.payload;
@@ -167,9 +167,11 @@ async function handlePostback(sender_psid, received_postback) {
     // Set the response based on the postback payload
     if (payload === 'yes') {
         response = { "text": "Thanks!" }
+        await callSendAPI(sender_psid, response);
     }
     if (payload === 'no') {
         response = { "text": "Oops, try sending another image." }
+        await callSendAPI(sender_psid, response);
     } if (payload === 'GET_STARTED') {
         try {
             username = await getUserName(sender_psid);
@@ -185,7 +187,8 @@ async function handlePostback(sender_psid, received_postback) {
     }
 
     if (payload === 'menu_main') {
-        response = { "text": "Oops, try sending another image." }
+        response = { "text": "MM" }
+        await callSendAPI(sender_psid, response);
     }
 }
 
