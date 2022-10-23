@@ -269,7 +269,71 @@ function getStartedTemplate() {
     return response;
 }
 
+function handleSendMainMenu() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res1 = getMainMenuTemplate();
+            //text
+            await callSendAPI(sender_psid, res1);
+            //template
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+function getMainMenuTemplate() {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Menu nhà hàng",
+                        "subtitle": "Menu nhà hàng",
+                        "image_url": imgGetStarted,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Đặt bàn",
+                                "payload": "reserve_table",
+                            }
+                        ],
+                    },
+                    {
+                        "title": "Giờ mở cửa",
+                        "subtitle": "T2-T6 10AM - 11PM",
+                        "image_url": imgGetStarted,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Đặt bàn",
+                                "payload": "reserve_table",
+                            }
+                        ],
+                    },
+                    {
+                        "title": "Không gian nhà hàng",
+                        "subtitle": "Nhà hàng có sức chứa...",
+                        "image_url": imgGetStarted,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Chi tiết",
+                                "payload": "show_room",
+                            }
+                        ],
+                    }
+
+                ]
+            }
+        }
+    }
+    return response;
+}
+
 module.exports = {
     getHomePage, getWebHook, postWebHook,
-    setupProfile
+    setupProfile, handleSendMainMenu
 }
