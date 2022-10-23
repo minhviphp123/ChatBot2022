@@ -187,7 +187,7 @@ async function handlePostback(sender_psid, received_postback) {
     }
 
     if (payload === 'main_menu') {
-        response = { "text": "MM" }
+        response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
 }
