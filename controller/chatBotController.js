@@ -97,7 +97,11 @@ async function handleMessage(sender_psid, received_message) {
             throw new Error(err);
         }
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
-    } else {
+    }
+    else if ((received_message.text).includes('đau chân')) {
+        response = { 'text': 'kệ mm' }
+    }
+    else {
         response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
     }
 
