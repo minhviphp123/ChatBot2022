@@ -98,7 +98,7 @@ async function handleMessage(sender_psid, received_message) {
         }
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
-    else if ((received_message.text).includes('đau')) {
+    else if ((received_message.text).includes('đặt lịch')) {
         response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
@@ -266,6 +266,11 @@ function getStartedTemplate() {
                             "type": "postback",
                             "title": "HD sử dụng Bot!",
                             "payload": "guide_to_use",
+                        },
+                        {
+                            "type": "web_url",
+                            "title": "HD đặt lịch khám!",
+                            "url": "https://youmed.vn/tin-tuc/huong-dan-dat-lich-kham-cac-bac-si-phong-kham-de-dang-qua-youmed/",
                         }
                     ],
                 }]
@@ -286,6 +291,32 @@ function handleSendMainMenu() {
             reject(e);
         }
     })
+}
+
+function getTemplateForPatient() {
+    let response = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [
+                    {
+                        "title": "Menu nhà hàng",
+                        "subtitle": "Menu nhà hàng",
+                        "image_url": imgGetStarted,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": "Đặt bàn",
+                                "payload": "reserve_table",
+                            }
+                        ],
+                    }
+                ]
+            }
+        }
+    }
+    return response;
 }
 
 function getMainMenuTemplate() {
