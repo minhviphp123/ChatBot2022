@@ -267,11 +267,11 @@ function getStartedTemplate() {
                             "title": "HD sử dụng Bot!",
                             "payload": "guide_to_use",
                         },
-                        {
-                            "type": "web_url",
-                            "title": "HD đặt lịch khám!",
-                            "url": "https://youmed.vn/tin-tuc/huong-dan-dat-lich-kham-cac-bac-si-phong-kham-de-dang-qua-youmed/",
-                        }
+                        // {
+                        //     "type": "web_url",
+                        //     "title": "HD đặt lịch khám!",
+                        //     "url": "https://youmed.vn/tin-tuc/huong-dan-dat-lich-kham-cac-bac-si-phong-kham-de-dang-qua-youmed/",
+                        // }
                     ],
                 }]
             }
