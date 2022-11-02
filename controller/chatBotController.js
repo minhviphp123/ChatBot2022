@@ -97,6 +97,7 @@ async function handleMessage(sender_psid, received_message) {
             throw new Error(err);
         }
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
+        return;
     }
 
     if ((received_message.text).includes('đặt lịch')) {
