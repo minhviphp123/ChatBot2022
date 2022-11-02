@@ -98,12 +98,17 @@ async function handleMessage(sender_psid, received_message) {
         }
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
-    else if ((received_message.text).includes('đặt lịch')) {
+
+    if ((received_message.text).includes('đặt lịch')) {
         response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
 
-    else if (received_message.attachments) {
+    if (received_message.text) {
+        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
+    }
+
+    if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -131,9 +136,6 @@ async function handleMessage(sender_psid, received_message) {
                 }
             }
         }
-    }
-    else {
-        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
     }
 
     // Send the response message
