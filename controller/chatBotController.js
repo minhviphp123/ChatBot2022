@@ -102,11 +102,8 @@ async function handleMessage(sender_psid, received_message) {
         response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
-    else {
-        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
-    }
 
-    if (received_message.attachments) {
+    else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -134,6 +131,9 @@ async function handleMessage(sender_psid, received_message) {
                 }
             }
         }
+    }
+    else {
+        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
     }
 
     // Send the response message
