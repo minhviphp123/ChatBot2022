@@ -93,7 +93,6 @@ async function handleMessage(sender_psid, received_message) {
         try {
             username = await getUserName(sender_psid);
             response = { 'text': `Hello ${username}` }
-            return;
         } catch (err) {
             throw new Error(err);
         }
@@ -105,9 +104,9 @@ async function handleMessage(sender_psid, received_message) {
         await callSendAPI(sender_psid, response);
     }
 
-    if (received_message.text) {
-        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
-    }
+    // if (received_message.text) {
+    //     response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
+    // }
 
     if (received_message.attachments) {
         // Get the URL of the message attachment
@@ -137,6 +136,7 @@ async function handleMessage(sender_psid, received_message) {
                 }
             }
         }
+        callSendAPI(sender_psid, response);
     }
 
     // Send the response message
