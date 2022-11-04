@@ -93,13 +93,14 @@ async function handleMessage(sender_psid, received_message) {
         try {
             username = await getUserName(sender_psid);
             response = { 'text': `Hello ${username}` }
+            await callSendAPI(sender_psid, response);
         } catch (err) {
             throw new Error(err);
         }
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
 
-    if ((received_message.text).includes('đặt lịch')) {
+    else if ((received_message.text).includes('đặt lịch')) {
         response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
@@ -141,7 +142,7 @@ async function handleMessage(sender_psid, received_message) {
     }
 
     // Send the response message
-    callSendAPI(sender_psid, response);
+
 }
 
 function callSendAPI(sender_psid, response) {
