@@ -100,7 +100,7 @@ async function handleMessage(sender_psid, received_message) {
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
 
-    else if ((received_message.text).includes('đặt lịch')) {
+    if ((received_message.text).includes('đặt lịch')) {
         response = await getMainMenuTemplate();
         await callSendAPI(sender_psid, response);
     }
