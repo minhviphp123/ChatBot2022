@@ -133,7 +133,8 @@ async function handleMessage(sender_psid, received_message) {
     }
 
     else {
-        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
+        // response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
+        response = { 'url': 'https://developers.facebook.com/docs/messenger-platform/getting-started/quick-start' }
         callSendAPI(sender_psid, response);
     }
 
