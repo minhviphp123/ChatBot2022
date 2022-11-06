@@ -100,11 +100,6 @@ async function handleMessage(sender_psid, received_message) {
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
 
-    else if (received_message.text.includes('jsking')) {
-        response = { 'text': 'JSKING' };
-        await callSendAPI(sender_psid, response);
-    }
-
     else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
