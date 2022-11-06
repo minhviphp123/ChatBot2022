@@ -100,12 +100,7 @@ async function handleMessage(sender_psid, received_message) {
         // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
     }
 
-    else {
-        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
-        callSendAPI(sender_psid, response);
-    }
-
-    if (received_message.attachments) {
+    else if (received_message.attachments) {
         // Get the URL of the message attachment
         let attachment_url = received_message.attachments[0].payload.url;
         response = {
@@ -137,7 +132,10 @@ async function handleMessage(sender_psid, received_message) {
         callSendAPI(sender_psid, response);
     }
 
-    // Send the response message
+    else {
+        response = { 'text': `You sent the message: "${received_message.text}". Now send me an image!` }
+        callSendAPI(sender_psid, response);
+    }
 
 }
 
