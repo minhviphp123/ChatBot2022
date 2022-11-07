@@ -97,7 +97,11 @@ async function handleMessage(sender_psid, received_message) {
         } catch (err) {
             throw new Error(err);
         }
-        // (received_message.text !== 'hello' && received_message.text !== 'hi' && received_message.text !== 'Get_started')
+    }
+
+    else if (received_message.text === 'jsking') {
+        response = await getMainMenuTemplate();
+        await callSendAPI(sender_psid, response);
     }
 
     else if (received_message.attachments) {
