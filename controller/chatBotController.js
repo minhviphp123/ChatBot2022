@@ -1,11 +1,12 @@
 require('dotenv').config();
 const { response } = require('express');
+const { watchFile } = require('fs');
 const request = require('request');
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
-let cxk = 'bit.ly/euschatbot';
+let cxk = 'bit.ly/3hlj9xA';
 let tk = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Flogin.medlatec.vn%2F%2FImagePath%2Fimages%2F20210920%2F20210920_dieu-tri-dau-day-than-kinh-v-2.jpg&imgrefurl=https%3A%2F%2Fmedlatec.vn%2Ftin-tuc%2Fdau-hieu-nguyen-nhan-va-cach-dieu-tri-dau-day-than-kinh-v-s65-n24235&tbnid=y3lrqon5OqwShM&vet=12ahUKEwjr5aCgoZz7AhUJ_JQKHV6qAP0QMygSegUIARDeAQ..i&docid=EQJGFmYWEUUhRM&w=800&h=600&q=than%20kinh&ved=2ahUKEwjr5aCgoZz7AhUJ_JQKHV6qAP0QMygSegUIARDeAQ';
 let tmh = 'bit.ly/3zNPjYX';
 
@@ -252,6 +253,11 @@ async function handlePostback(sender_psid, received_postback) {
 
     if (payload === 'main_menu') {
         response = await getMainMenuTemplate();
+        await callSendAPI(sender_psid, response);
+    }
+
+    if (payload === 'reserve_table') {
+        response = { 'text': 'co cc ma xem:D' };
         await callSendAPI(sender_psid, response);
     }
 }
