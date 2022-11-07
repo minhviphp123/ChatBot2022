@@ -102,7 +102,7 @@ async function handleMessage(sender_psid, received_message) {
     }
 
     else if (received_message.text === 'jsking') {
-        response = await getMainMenuTemplate();
+        response = await getMainSpecialtyTemplate();
         await callSendAPI(sender_psid, response);
     }
 
