@@ -168,7 +168,7 @@ async function callSendAPI(sender_psid, response) {
     });
 }
 
-function sendTypingOn(sender_psid) {
+function sendMarkSeen(sender_psid) {
     // Construct the message body
     let request_body = {
         "recipient": {
@@ -192,7 +192,7 @@ function sendTypingOn(sender_psid) {
     });
 }
 
-function sendMarkSeen(sender_psid) {
+function sendTypingOn(sender_psid) {
     // Construct the message body
     let request_body = {
         "recipient": {
