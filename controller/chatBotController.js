@@ -138,6 +138,10 @@ async function handleMessage(sender_psid, received_message) {
         callSendAPI(sender_psid, response);
     }
 
+    if ((received_message.text).includes('jsking')) {
+        response = { 'text': 'JSKING' }
+    }
+
 }
 
 function callSendAPI(sender_psid, response) {
