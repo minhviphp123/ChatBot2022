@@ -259,7 +259,7 @@ async function handlePostback(sender_psid, received_postback) {
     }
 
     if (payload === 'reserve_table') {
-        response = { 'text': 'co cc ma xem:D' };
+        response = getDetailTemplate();
         await callSendAPI(sender_psid, response);
     }
 }
@@ -444,40 +444,27 @@ function getDetailTemplate() {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "Chuyên khoa",
-                        "subtitle": "Cơ Xương Khớp",
+                        "title": "Bác Sĩ",
+                        "subtitle": "A",
                         "image_url": eusImg,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Chi Tiết",
-                                "payload": "reserve_table",
-                            }
-                        ],
+                        // "buttons": [
+                        //     {
+                        //         "type": "postback",
+                        //         "title": "Chi Tiết",
+                        //         "payload": "reserve_table",
+                        //     }
+                        // ],
                     },
                     {
-                        "title": "Chuyên khoa",
-                        "subtitle": "Thần Kinh",
-                        "image_url": tk,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Chi Tiết",
-                                "payload": "reserve_table",
-                            }
-                        ],
+                        "title": "Bác Sĩ",
+                        "subtitle": "B",
+                        "image_url": eusImg,
+
                     },
                     {
-                        "title": "Chuyên Khoa",
-                        "subtitle": "Tai Mũi Họng",
-                        "image_url": tmh,
-                        "buttons": [
-                            {
-                                "type": "postback",
-                                "title": "Chi tiết",
-                                "payload": "reserve_table",
-                            }
-                        ],
+                        "title": "Bác Sĩ",
+                        "subtitle": "C",
+                        "image_url": eusImg,
                     }
 
                 ]
