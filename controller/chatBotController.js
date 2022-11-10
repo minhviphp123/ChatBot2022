@@ -104,7 +104,7 @@ async function handleMessage(sender_psid, received_message) {
         }
     }
 
-    else if (received_message.text === 'jsking') {
+    else if (received_message.text === 'chuyên khoa') {
         response = await getMainSpecialtyTemplate();
         await callSendAPI(sender_psid, response);
     }
